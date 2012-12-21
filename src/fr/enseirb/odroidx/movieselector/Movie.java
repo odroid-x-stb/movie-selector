@@ -1,4 +1,4 @@
-package fr.enseirb.odroid.XMLParser;
+package fr.enseirb.odroidx.movieselector;
 
 public class Movie {
 	private long id;

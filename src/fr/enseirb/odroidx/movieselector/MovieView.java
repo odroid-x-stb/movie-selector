@@ -1,4 +1,4 @@
-package fr.enseirb.odroid.XMLParser;
+package fr.enseirb.odroidx.movieselector;
 
 import android.widget.TextView;
 

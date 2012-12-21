@@ -1,8 +1,8 @@
-package fr.enseirb.odroid.XMLParser;
+package fr.enseirb.odroidx.movieselector;
 
 import java.util.ArrayList;
 
-import fr.enseirb.odroid.XMLParser.R;
+import fr.enseirb.odroidx.movieselector.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

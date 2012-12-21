@@ -1,4 +1,4 @@
-package fr.enseirb.odroid.XMLParser;
+package fr.enseirb.odroidx.movieselector;
 
 import java.util.ArrayList;
 
@@ -56,8 +56,7 @@ public class ParserXMLHandler extends DefaultHandler {
 		buffer = new StringBuffer();		
 
 		if (localName.equalsIgnoreCase(VOD)){			
-			//this.currentMovie = new Movie();
-			inItem = true;
+				inItem = true;
 		}
 	}
 

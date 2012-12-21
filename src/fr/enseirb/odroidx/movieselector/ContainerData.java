@@ -1,4 +1,4 @@
-package fr.enseirb.odroid.XMLParser;
+package fr.enseirb.odroidx.movieselector;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,7 +18,7 @@ public class ContainerData {
 	
 	static public Context context;
 	
-	public static ArrayList<Movie> getFeeds(){
+	public static ArrayList<Movie> getMovies(String ip){
 		SAXParserFactory fabrique = SAXParserFactory.newInstance();
 		SAXParser parser = null;
 		ArrayList<Movie> movies = null;
@@ -32,6 +32,7 @@ public class ContainerData {
 		
 		URL url = null;
 		try {
+//			url = new URL(ip + "/vod.xml");
 			url = new URL("http://collocmarcel.free.fr/vod.xml");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

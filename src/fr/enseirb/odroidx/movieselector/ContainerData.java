@@ -37,18 +37,13 @@ public class ContainerData {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
-		/* 
-		 * Le handler sera gestionnaire du fichier XML c'est a dire que c'est lui qui sera charge
-		 * des operations de parsing. On vera cette classe en details ci apres.
-		*/
+
 		DefaultHandler handler = new ParserXMLHandler();
 		try {
 			parser.parse(url.openConnection().getInputStream(), handler);
 			
-			// On recupere la liste des films
 			movies = ((ParserXMLHandler) handler).getData();
-			
+					
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

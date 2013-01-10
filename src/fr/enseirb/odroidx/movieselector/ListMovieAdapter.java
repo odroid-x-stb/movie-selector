@@ -45,13 +45,6 @@ public class ListMovieAdapter extends BaseAdapter {
 		return this.movies.get(index).getId();
 	}
 
-	
-	// * Le parametre "convertView" permet de recycler les elements 
-	// * de notre liste. En effet, l'operation pour convertir un layout 
-	// * XML en IHM standard est tres couteuse pour la plateforme Android. 
-	// * On nous propose ici de reutiliser des occurences creees qui ne sont 
-	// * plus affichees. Donc si ce parametre est "null" alors, il faut "inflater" 
-	// * notre layout XML, sinon on le reutilise
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
 		MovieView fv;		

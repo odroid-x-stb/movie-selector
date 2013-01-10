@@ -41,10 +41,11 @@ public class MoviePlayer extends Activity {
 				Intent vlcLaunch = new Intent();
 				
 				Movie selectedMovie = (Movie) parent.getItemAtPosition(position); 
-				String selectedMovieName = selectedMovie.getTitle();
+				String selectedMovieTitle = selectedMovie.getTitle();
+				String selectedMovieLink = selectedMovie.getLink();
 //				vlcLaunch.putExtra("useVLC", true);
-//				vlcLaunch.putExtra("URL", ip + "/VOD/" + selectedMovieName +".mpd");
-				System.out.println("intent launched, URL = " + ip + "/VOD/" + selectedMovieName +".mpd");
+//				vlcLaunch.putExtra("URL", selectedMovieLink);
+				System.out.println("intent launched, URL = " + selectedMovieLink);
 				
 //				startActivity(vlcLaunch);
 			}

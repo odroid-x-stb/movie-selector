@@ -32,8 +32,7 @@ public class ContainerData {
 		
 		URL url = null;
 		try {
-//			url = new URL(ip + "/vod.xml");
-			url = new URL("http://collocmarcel.free.fr/vod.xml");
+			url = new URL(ip + "/vod.xml");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

@@ -15,20 +15,12 @@ public class ListMovieAdapter extends BaseAdapter {
 
 	private ArrayList<Movie> movies;
 	
-	// * Le LayoutInflater permet de parser un layout XML et de 
-	// * te transcoder en IHM Android. Pour respecter l'interface 
-	// * BaseAdapter 
 	private LayoutInflater inflater;
 	
 	public ListMovieAdapter(Context context,ArrayList<Movie> movies) {
 		inflater = LayoutInflater.from(context);
 		this.movies = movies;
 	}
-	
-	// * il nous faut specifier la methode "count()". 
-	// * Cette methode permet de connaitre le nombre d'items presents 
-	// * dans la liste. Dans notre cas, il faut donc renvoyer le nombre
-	// * de personnes contenus dans "mListP".
 	
 	@Override
 	public int getCount() {

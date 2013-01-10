@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MoviePlayer extends Activity {
 	
@@ -22,10 +23,10 @@ public class MoviePlayer extends Activity {
 		if(savedInstanceState != null) {
 			ip = savedInstanceState.getString("serverIP");
 		}
-//		else {
-//			Toast.makeText(this, "Impossible to get server IP", Toast.LENGTH_LONG).show();
-//			finish();
-//		}
+		else {
+			Toast.makeText(this, "Impossible to get server IP", Toast.LENGTH_LONG).show();
+			finish();
+		}
 		
 		setContentView(R.layout.main);
 		ArrayList<Movie> movies = ContainerData.getMovies(ip);
@@ -43,11 +44,11 @@ public class MoviePlayer extends Activity {
 				Movie selectedMovie = (Movie) parent.getItemAtPosition(position); 
 				String selectedMovieTitle = selectedMovie.getTitle();
 				String selectedMovieLink = selectedMovie.getLink();
-//				vlcLaunch.putExtra("useVLC", true);
-//				vlcLaunch.putExtra("URL", selectedMovieLink);
-				System.out.println("intent launched, URL = " + selectedMovieLink);
+				vlcLaunch.putExtra("useVLC", true);
+				vlcLaunch.putExtra("URL", selectedMovieLink);
+//				System.out.println("intent launched, URL = " + selectedMovieLink);
 				
-//				startActivity(vlcLaunch);
+				startActivity(vlcLaunch);
 			}
 		});
 	}

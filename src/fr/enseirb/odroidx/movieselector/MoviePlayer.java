@@ -20,6 +20,9 @@ public class MoviePlayer extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+	    STBRemoteControlCommunication stbrcc = new STBRemoteControlCommunication(this);
+	    stbrcc.doBindService();
+		
 		if(savedInstanceState != null) {
 			ip = savedInstanceState.getString("serverIP");
 		}

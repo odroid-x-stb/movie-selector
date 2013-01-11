@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MoviePlayer extends Activity {
 	
-	private String ip = "http://collocmarcel.free.fr";
+	private String ip = "";
 	
 	/** Called when the activity is first created. */
 	@Override

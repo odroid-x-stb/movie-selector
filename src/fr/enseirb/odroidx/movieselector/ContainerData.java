@@ -31,12 +31,12 @@ public class ContainerData {
 			e.printStackTrace();
 		}
 		
-		URL url = null;
+		URL url;
 		try {
-			url = new URL(ip + "/vod.xml");
+			url = new URL("http://" + ip + ":8080/dash-manager/vod");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			Toast.makeText(context, "Malformed URL malformed or unreachabke vod.xml", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "Malformed URL or unreachable XML", Toast.LENGTH_LONG).show();
 			return null;
 		}
 

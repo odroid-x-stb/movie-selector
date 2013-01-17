@@ -14,19 +14,22 @@ import android.widget.TextView;
 public class ListMovieAdapter extends BaseAdapter {
 
 	private ArrayList<Movie> movies;
-	
+
 	private LayoutInflater inflater;
-	
+
 	public ListMovieAdapter(Context context,ArrayList<Movie> movies) {
 		inflater = LayoutInflater.from(context);
 		this.movies = movies;
 	}
-	
+
 	@Override
 	public int getCount() {
+		if (movies == null)
+			return 0;
 		return movies.size();
+
 	}
-	
+
 	@Override
 	public Object getItem(int index) {
 		return movies.get(index);
@@ -40,7 +43,7 @@ public class ListMovieAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
 		MovieView fv;		
-		
+
 		if (convertView == null) {
 			fv = new MovieView();
 			convertView = inflater.inflate(R.layout.movie_view, null);
@@ -52,7 +55,7 @@ public class ListMovieAdapter extends BaseAdapter {
 			fv = (MovieView) convertView.getTag();
 		}						
 		fv.title.setText(movies.get(position).getTitle());
-		
+
 		return convertView;
 	}
 }

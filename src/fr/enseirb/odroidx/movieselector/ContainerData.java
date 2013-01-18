@@ -16,9 +16,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class ContainerData {	
-	
+
 	static public Context context;
-	
+
 	public static ArrayList<Movie> getMovies(String ip, Context context){
 		SAXParserFactory fabrique = SAXParserFactory.newInstance();
 		SAXParser parser = null;
@@ -30,7 +30,7 @@ public class ContainerData {
 		} catch (SAXException e) {
 			e.printStackTrace();
 		}
-		
+
 		URL url;
 		try {
 			url = new URL("http://" + ip + ":8080/dash-manager/vod");
@@ -43,9 +43,9 @@ public class ContainerData {
 		DefaultHandler handler = new ParserXMLHandler();
 		try {
 			parser.parse(url.openConnection().getInputStream(), handler);
-			
+
 			movies = ((ParserXMLHandler) handler).getData();
-					
+
 		} catch (SAXException e) {
 			e.printStackTrace();
 			Toast.makeText(context, "Impossible to parse vod.xml", Toast.LENGTH_LONG).show();

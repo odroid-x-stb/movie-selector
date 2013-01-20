@@ -19,7 +19,9 @@ public class ContainerData {
 
 	static public Context context;
 
+	/* method which returns the list of films */
 	public static ArrayList<Movie> getMovies(String ip, Context context){
+		/* use SAX to parse XML file on the server  */
 		SAXParserFactory fabrique = SAXParserFactory.newInstance();
 		SAXParser parser = null;
 		ArrayList<Movie> movies = null;
@@ -33,6 +35,7 @@ public class ContainerData {
 
 		URL url;
 		try {
+			/* open the link to the XML file, thanks to the IP adress given in parameter, if possible */
 			url = new URL("http://" + ip + ":8080/dash-manager/vod");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -40,6 +43,7 @@ public class ContainerData {
 			return null;
 		}
 
+		/* launches the parsing to get back the list of movies */
 		DefaultHandler handler = new ParserXMLHandler();
 		try {
 			parser.parse(url.openConnection().getInputStream(), handler);

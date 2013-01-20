@@ -20,15 +20,18 @@ public class MovieSelector extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		/* gets back IP adress of the server from the home application */
 		Intent receivedIntent = getIntent();
 		if(receivedIntent != null) {
 			ip = receivedIntent.getStringExtra("serverIP");
 		}
 		else {
-			Toast.makeText(this, "Impossible to get server IP", Toast.LENGTH_LONG).show();
+			/* close the app if there is no IP */
+			Toast.makeText(this, "Impossible to get server IP, check your settings in the home", Toast.LENGTH_LONG).show();
 			finish();
 		}
 		
+		/* View generation */
 		setContentView(R.layout.main);
 		ArrayList<Movie> movies = ContainerData.getMovies(ip, getApplicationContext());
 		if (movies == null)
@@ -37,7 +40,8 @@ public class MovieSelector extends Activity {
 		ListView m = ((ListView)findViewById(R.id.listMovies));
 		m.setAdapter(listMovieAdapter);
 		m.setOnItemClickListener(new OnItemClickListener() {
-
+			/* action when you click on the film you want to play */
+			/* launch our VLC here */
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long arg3) {

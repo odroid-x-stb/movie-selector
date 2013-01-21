@@ -62,9 +62,7 @@ public class ContainerData {
 		DefaultHandler handler = new ParserXMLHandler();
 		try {
 			parser.parse(url.openConnection().getInputStream(), handler);
-
 			movies = ((ParserXMLHandler) handler).getData();
-
 		} catch (SAXException e) {
 			e.printStackTrace();
 			Toast.makeText(context, "Impossible to parse vod.xml", Toast.LENGTH_LONG).show();
@@ -74,7 +72,6 @@ public class ContainerData {
 			Toast.makeText(context, "Connection to server impossible", Toast.LENGTH_LONG).show();
 			return null;
 		}
-
 		return movies;
 	}
 }

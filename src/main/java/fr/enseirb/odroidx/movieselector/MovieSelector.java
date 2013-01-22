@@ -16,6 +16,9 @@
 package fr.enseirb.odroidx.movieselector;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import fr.enseirb.odroidx.movieselector.ParseXMLTask.ParseXMLTaskListenner;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,9 +29,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MovieSelector extends Activity {
+public class MovieSelector extends Activity implements ParseXMLTaskListenner {
 	
 	private String ip;
+	private ArrayList<Movie> movies = new ArrayList<Movie>();
+	private ListMovieAdapter listMovieAdapter;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -37,10 +42,9 @@ public class MovieSelector extends Activity {
 		
 		/* gets back IP adress of the server from the home application */
 		Intent receivedIntent = getIntent();
-		if(receivedIntent != null) {
+		if(receivedIntent != null && receivedIntent.getStringExtra("serverIP") != null) {
 			ip = receivedIntent.getStringExtra("serverIP");
-		}
-		else {
+		} else {
 			/* close the app if there is no IP */
 			Toast.makeText(this, "Impossible to get server IP, check your settings in the home", Toast.LENGTH_LONG).show();
 			finish();
@@ -48,29 +52,34 @@ public class MovieSelector extends Activity {
 		
 		/* View generation */
 		setContentView(R.layout.main);
-		ArrayList<Movie> movies = ContainerData.getMovies(ip, getApplicationContext());
-		if (movies == null)
-			finish();
-		ListMovieAdapter listMovieAdapter = new ListMovieAdapter(this, movies);
+		new ParseXMLTask(this).execute(ip);
+		listMovieAdapter = new ListMovieAdapter(this, movies);
 		ListView m = ((ListView)findViewById(R.id.listMovies));
 		m.setAdapter(listMovieAdapter);
 		m.setOnItemClickListener(new OnItemClickListener() {
 			/* action when you click on the film you want to play */
 			/* launch our VLC here */
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long arg3) {
-				
+			public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {		
 				Intent vlcLaunch = getPackageManager().getLaunchIntentForPackage("org.videolan.vlc");
-				
 				Movie selectedMovie = (Movie) parent.getItemAtPosition(position); 
 				String selectedMovieName = selectedMovie.getTitle();
 				vlcLaunch.putExtra("isVodFile", true);
 				vlcLaunch.putExtra("URL","http://"+ ip + "/VOD/" + selectedMovieName +".mpd");
 				System.out.println("intent launched, URL = " + ip + "/VOD/" + selectedMovieName +".mpd");
-				
 				startActivity(vlcLaunch);
 			}
 		});
+	}
+
+	@Override
+	public void parseSucceed(List<Movie> movies) {
+		this.movies.addAll(movies);
+		listMovieAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void parseFailed(String errorMessage) {
+		Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
 	}
 }

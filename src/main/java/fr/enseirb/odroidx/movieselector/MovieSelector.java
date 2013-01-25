@@ -34,14 +34,14 @@ public class MovieSelector extends Activity implements ParseXMLTaskListenner {
 	private String ip;
 	private ArrayList<Movie> movies = new ArrayList<Movie>();
 	private ListMovieAdapter listMovieAdapter;
+	private STBRemoteControlCommunication stbrcc;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
-	    STBRemoteControlCommunication stbrcc = new STBRemoteControlCommunication(this);
-	    stbrcc.doBindService();
+		stbrcc = new STBRemoteControlCommunication(this);
 		
 		/* gets back IP adress of the server from the home application */
 		Intent receivedIntent = getIntent();
@@ -74,6 +74,19 @@ public class MovieSelector extends Activity implements ParseXMLTaskListenner {
 		});
 	}
 
+	
+	@Override
+	protected void onStart() {
+		stbrcc.doBindService();
+		super.onStart();
+	}
+
+	@Override
+	protected void onStop() {
+		stbrcc.doUnbindService();
+		super.onStop();
+	}
+	
 	@Override
 	public void parseSucceed(List<Movie> movies) {
 		this.movies.addAll(movies);

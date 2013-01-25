@@ -66,10 +66,9 @@ public class MovieSelector extends Activity implements ParseXMLTaskListenner {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {		
 				Intent vlcLaunch = getPackageManager().getLaunchIntentForPackage("org.videolan.vlc");
 				Movie selectedMovie = (Movie) parent.getItemAtPosition(position); 
-				String selectedMovieName = selectedMovie.getTitle();
+				String selectedMovieLink = selectedMovie.getLink();
 				vlcLaunch.putExtra("isVodFile", true);
-				vlcLaunch.putExtra("URL","http://"+ ip + "/VOD/" + selectedMovieName +".mpd");
-				System.out.println("intent launched, URL = " + ip + "/VOD/" + selectedMovieName +".mpd");
+				vlcLaunch.putExtra("URL",selectedMovieLink);
 				startActivity(vlcLaunch);
 			}
 		});

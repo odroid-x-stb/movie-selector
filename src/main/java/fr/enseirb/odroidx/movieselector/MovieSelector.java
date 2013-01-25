@@ -39,6 +39,9 @@ public class MovieSelector extends Activity implements ParseXMLTaskListenner {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	
+	    STBRemoteControlCommunication stbrcc = new STBRemoteControlCommunication(this);
+	    stbrcc.doBindService();
 		
 		/* gets back IP adress of the server from the home application */
 		Intent receivedIntent = getIntent();
